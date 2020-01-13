@@ -24,13 +24,6 @@ var registry = make(map[string]func(config.DiscoveryConfig) interface{})
  */
 func init() {
 	registry["static"] = NewStaticDiscovery
-	registry["srv"] = NewSrvDiscovery
-	registry["docker"] = NewDockerDiscovery
-	registry["json"] = NewJsonDiscovery
-	registry["exec"] = NewExecDiscovery
-	registry["plaintext"] = NewPlaintextDiscovery
-	registry["consul"] = NewConsulDiscovery
-	registry["lxd"] = NewLXDDiscovery
 }
 
 /**
