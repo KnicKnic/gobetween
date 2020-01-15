@@ -69,16 +69,18 @@ func Start(cfg config.ApiConfig) {
 
 	var err error
 	/* start rest api server */
-	if cfg.Tls != nil {
-		log.Info("Starting HTTPS server ", cfg.Bind)
-		err = app.RunTLS(cfg.Bind, cfg.Tls.CertPath, cfg.Tls.KeyPath)
-	} else {
-		log.Info("Starting HTTP server ", cfg.Bind)
-		err = app.Run(cfg.Bind)
-	}
+	go func() {
+		if cfg.Tls != nil {
+			log.Info("Starting HTTPS server ", cfg.Bind)
+			err = app.RunTLS(cfg.Bind, cfg.Tls.CertPath, cfg.Tls.KeyPath)
+		} else {
+			log.Info("Starting HTTP server ", cfg.Bind)
+			err = app.Run(cfg.Bind)
+		}
 
-	if err != nil {
-		log.Fatal(err)
-	}
+		if err != nil {
+			log.Fatal(err)
+		}
+	}()
 
 }
