@@ -51,14 +51,11 @@ func Launch(cfg config.Config) {
 	logging.Configure(cfg.Logging.Output, cfg.Logging.Level)
 
 	// Start API
-	/* go */
-	api.Start(cfg.Api)
+	go api.Start(cfg.Api)
 
 	/* setup metrics */
-	/* go */
-	metrics.Start(cfg.Metrics)
+	go metrics.Start(cfg.Metrics)
 
 	// Start manager
-	/* go */
-	manager.Initialize(cfg)
+	go manager.Initialize(cfg)
 }
